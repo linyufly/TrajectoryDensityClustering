@@ -23,8 +23,12 @@ void DensityMap::add_point(const double *coord) {
         continue;
       }
 
-      double coord[2];
-      get_grid_point(curr_index[0], curr_index[1], coord);
+      density_map_[curr_index[0]][curr_index[1]]++;
     }
   }
 }
+
+void DensityMap::deep_copy(const DensityMap &other) {
+  
+}
+

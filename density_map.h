@@ -69,6 +69,8 @@ class DensityMap {
     }
   }
 
+  void deep_copy(const DensityMap &other);
+
   void add_point(const double *coord);
 
  private:
