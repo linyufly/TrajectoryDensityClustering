@@ -35,21 +35,7 @@ class DensityMap {
   }
 
   ~DensityMap() {
-    if (density_map_) {
-      delete_matrix(density_map_);
-    }
-
-    if (spacing_) {
-      delete [] spacing_;
-    }
-
-    if (origin_) {
-      delete [] origin_;
-    }
-
-    if (dimensions_) {
-      delete [] dimensions_;
-    }
+    destroy();
   }
 
   bool outside(const int *index) const {
@@ -74,11 +60,29 @@ class DensityMap {
   void add_point(const double *coord);
 
  private:
+  void destroy() {
+    if (density_map_) {
+      delete_matrix(density_map_);
+    }
+
+    if (spacing_) {
+      delete [] spacing_;
+    }
+
+    if (origin_) {
+      delete [] origin_;
+    }
+
+    if (dimensions_) {
+      delete [] dimensions_;
+    }
+  }
+
   double **density_map_;
   double *spacing_;
   double *origin_;
   int *dimensions_;
 };
 
-#endif
+#endif  // DENSITY_MAP_H_
 

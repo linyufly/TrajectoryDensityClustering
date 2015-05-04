@@ -29,6 +29,28 @@ void DensityMap::add_point(const double *coord) {
 }
 
 void DensityMap::deep_copy(const DensityMap &other) {
-  
+  if (this == &other) {
+    return;
+  }
+
+  destroy();
+
+  dimensions_ = new int[2];
+  spacing_ = new double[2];
+  origin_ = new double[2];
+  density_map_ = create_matrix<double>(
+      other.dimensions_[0], other.dimensions_[1]);
+
+  for (int d = 0; d < 2; d++) {
+    dimensions_[d] = other.dimensions_[d];
+    spacing_[d] = other.spacing_[d];
+    origin_[d] = other.origin_[d];
+  }
+
+  for (int x = 0; x < dimensions_[0]; x++) {
+    for (int y = 0; y < dimensions_[1]; y++) {
+      density_map_[x][y] = other.density_map_[x][y];
+    }
+  }
 }
 
