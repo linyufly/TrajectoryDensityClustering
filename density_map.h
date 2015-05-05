@@ -63,6 +63,8 @@ class DensityMap {
 
   void add_point(const double *coord);
 
+  void gaussian_smoothing(double delta);
+
   double *operator [] (int row) const {
     return density_map_[row];
   }
