@@ -17,7 +17,7 @@ const int kXRes = 200;
 const int kYRes = 200;
 
 const double kStep = 0.001;
-
+const double kGaussianDelta = 1.0;
 }
 
 void add_point_test() {
@@ -70,6 +70,8 @@ void add_point_test() {
     sampler.get_sample(s, coord);
     density_map.add_point(coord);
   }
+
+  density_map.gaussian_smoothing(kGaussianDelta);
 
   FILE *fout = fopen(kDensityMapFile, "w");
 
