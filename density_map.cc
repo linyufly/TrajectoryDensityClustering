@@ -56,13 +56,13 @@ void DensityMap::deep_copy(const DensityMap &other) {
   }
 }
 
-void gaussian_smoothing(double delta) {
+void DensityMap::gaussian_smoothing(double delta) {
   int nx = dimensions_[0];
   int ny = dimensions_[1];
   double dx = spacing_[0];
   double dy = spacing_[1];
 
-  double *x_sum = create_matrix<double>(nx, ny);
+  double **x_sum = create_matrix<double>(nx, ny);
 
   for (int x = 0; x < nx; x++) {
     for (int y = 0; y < ny; y++) {

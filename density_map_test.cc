@@ -11,7 +11,8 @@ namespace {
 
 const char *kTrajectoryFile = "data/atlantic_storms.txt";
 
-const char *kDensityMapFile = "density_map.csv";
+const char *kDensityMapCSVFile = "density_map.csv";
+const char *kDensityMapPlainTextFile = "density_map.txt";
 
 const int kXRes = 200;
 const int kYRes = 200;
@@ -73,14 +74,27 @@ void add_point_test() {
 
   density_map.gaussian_smoothing(kGaussianDelta);
 
-  FILE *fout = fopen(kDensityMapFile, "w");
+  FILE *fout = fopen(kDensityMapCSVFile, "w");
 
   for (int y = 0; y < kYRes; y++) {
     for (int x = 0; x < kXRes; x++) {
       if (x) {
         fprintf(fout, ", ");
       }
-      fprintf(fout, "%lf", density_map[x][y]);
+      fprintf(fout, "%lf", density_map[x][kYRes - 1 - y]);
+    }
+    fprintf(fout, "\n");
+  }
+
+  fclose(fout);
+
+  fout = fopen(kDensityMapPlainTextFile, "w");
+
+  fprintf(fout, "%lf %lf %lf %lf\n", min_x, max_x, min_y, max_y);
+  fprintf(fout, "%d %d\n", kXRes, kYRes);
+  for (int x = 0; x < kXRes; x++) {
+    for (int y = 0; y < kYRes; y++) {
+      fprintf(fout, "%lf ", density_map[x][y]);
     }
     fprintf(fout, "\n");
   }
