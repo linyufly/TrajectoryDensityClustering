@@ -13,7 +13,7 @@ const double kEpsilon = 1e-8;
 void SegmentSampler::sample_segment(
     double x_1, double y_1, double x_2, double y_2,
     double start_distance, double step) {
-  double length = distance_2d(x_1, y_1, x_2, y_2);
+  double length = Math::distance_2d(x_1, y_1, x_2, y_2);
 
   if (length <= kEpsilon || length < start_distance) {
     return;
